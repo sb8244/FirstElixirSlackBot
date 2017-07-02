@@ -17,7 +17,9 @@ defmodule FirstSlackBot.Slack.Supervisor do
   """
   def init([]) do
     case System.get_env("SLACK_TOKEN") do
-      nil -> IO.inspect "You must set SLACK_TOKEN environment variable to start this bot"
+      nil ->
+        IO.puts(:stderr, IO.ANSI.format([:red, :bright, "You must set SLACK_TOKEN environment variable to start this bot"], true))
+        supervise([], strategy: :one_for_one)
       oauth_token when is_bitstring(oauth_token) ->
         name = String.to_atom("bot_" <> oauth_token)
 
