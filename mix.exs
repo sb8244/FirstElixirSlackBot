@@ -31,6 +31,7 @@ defmodule FirstSlackBot.Mixfile do
   defp deps do
     [
       {:slack, "~> 0.11.0"},
+      {:websocket_client, "~> 1.2.4", override: true},
     ]
   end
 end
